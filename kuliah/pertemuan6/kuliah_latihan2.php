@@ -8,13 +8,19 @@ $mahasiswa = [
     "nama" => "Hafizh Faiz F", 
     "npm" => "213040083", 
     "email" => "hafizh.213040083@mail.unpas.ac.id", 
-    "jurusan" => "Teknik Informatika"
+    "prodi" => "Teknik Informatika"
     ],
     [
     "nama" => "Putra RIzqi Pratama", 
     "npm" => "213040080", 
     "email" =>  "putra.213040080@mail.unpas.ac.id", 
-    "jurusan" => "Teknik Sipil"
+    "prodi" => "Teknik Sipil"
+    ],
+    [
+    "nama" => "Syahran Akbar Abdul Aziz", 
+    "npm" => "213040099", 
+    "email" =>  "syahran.213040099@mail.unpas.ac.id", 
+    "prodi" => "Teknik Mesin"
     ]
 ];
 //  var_dump($mahasiswa [1],"nama");
@@ -24,7 +30,7 @@ $mahasiswa = [
     <li>Nama : <?php echo $mhs["nama"]; ?></li>
     <li>NPM : <?php echo $mhs["npm"]; ?></li>
     <li>Email : <?php echo $mhs["email"]; ?></li>
-    <li>Jurusan : <?php echo $mhs["jurusan"]; ?></li>
+    <li>Jurusan : <?php echo $mhs["prodi"]; ?></li>
 </ul>
 <?php } ?>
 <hr>

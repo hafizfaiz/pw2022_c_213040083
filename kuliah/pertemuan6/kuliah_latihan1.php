@@ -6,7 +6,7 @@ $mahasiswa = [
 
     ["Hafizh Faiz F", "213040083", "hafizh.213040083@unpas.mail.ac.id", "Teknik Informatika"],
     ["Putra RIzqi Pratama", "213040080", "putra.213040080@unpas.mail.ac.id", "Teknik Sipil"],
-    ["Adiya Tanaya", "adiya.213040082@mail.unpas.ac.id", ]
+    ["Syahran Akbar Abdul Aziz","213040099", "syahran.213040099@mail.unpas.ac.id","Teknik Mesin" ]
 ];
 
 //var_dump($mahasiswa [1][3]);

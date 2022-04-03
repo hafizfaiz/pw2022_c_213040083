@@ -53,9 +53,6 @@ $mahasiswa = [
             <th scope="col">#</th>
             <th scope="col">Gambar</th>
             <th scope="col">Nama</th>
-            <th scope="col">Npm</th>
-            <th scope="col">Email</th>
-            <th scope="col">Jurusan</th>
             <th scope="col">Aksi</th>
             </tr>
         </thead>
@@ -65,12 +62,10 @@ $mahasiswa = [
                 <td scope="row"> <?= $no++;  ?> </td>
                 <td> <img src="img/<?php echo $mhs["gambar"]; ?>" class="rounded-circle foto" ></td>
                 <td><?php echo $mhs['nama'] ?></td>
-                <td><?php echo $mhs['npm'] ?></td>
-                <td><?php echo $mhs['email'] ?></td>
-                <td><?php echo $mhs['prodi'] ?></td>
                 <td>
                   <a href="#" class="btn btn-sm text-white bg-warning">Edit</a>
                   <a href="#" class="btn btn-sm text-white bg-danger">Delete</a>
+                  <a href="kuliah_latihan3.php?nama=<?= $mhs["nama"] ?>&npm=<?= $mhs["npm"]  ?>&email=<?= $mhs["email"]?>& prodi=<?= $mhs["prodi"]  ?>& gambar=<?= $mhs["gambar"] ?>" class="btn btn-sm text-white bg-info">Detail</a>
                 </td>
               </tr>
               <?php } ?>
