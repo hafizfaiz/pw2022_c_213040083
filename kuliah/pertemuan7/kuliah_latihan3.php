@@ -1,27 +1,26 @@
 <?php 
 $mahasiswa = [
-
     [
-        "nama" => "Hafizh Faiz F", 
-        "npm" => "213040083", 
-        "email" => "hafizh.213040083@mail.unpas.ac.id", 
-        "prodi" => "Teknik Informatika",
-        "gambar" => "gambar1.jpg"
-        ],
-        [
-        "nama" => "Putra RIzqi Pratama", 
-        "npm" => "213040080", 
-        "email" =>  "putra.213040080@mail.unpas.ac.id", 
-        "prodi" => "Teknik Sipil",
-        "gambar" => "gambar2.jpg"
-        ],
-        [
-        "nama" => "Syahran Akbar Abdul Aziz", 
-        "npm" => "213040099", 
-        "email" =>  "syahran.213040099@mail.unpas.ac.id", 
-        "prodi" => "Teknik Mesin",
-        "gambar" => "gambar3.jpg"
-        ]
+    "nama" => "Hafizh Faiz F", 
+    "npm" => "213040083", 
+    "email" => "hafizh.213040083@mail.unpas.ac.id", 
+    "prodi" => "Teknik Informatika",
+    "gambar" => "gambar1.jpg"
+    ],
+    [
+    "nama" => "Putra RIzqi Pratama", 
+    "npm" => "213040080", 
+    "email" =>  "putra.213040080@mail.unpas.ac.id", 
+    "prodi" => "Teknik Sipil",
+    "gambar" => "gambar2.jpg"
+    ],
+    [
+    "nama" => "Syahran Akbar Abdul Aziz", 
+    "npm" => "213040099", 
+    "email" =>  "syahran.213040099@mail.unpas.ac.id", 
+    "prodi" => "Teknik Mesin",
+    "gambar" => "gambar3.jpg"
+    ]
 ];
 ?>
 <!doctype html>
@@ -49,14 +48,14 @@ $mahasiswa = [
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="img/<?= $_GET['gambar'] ?>" class="img-fluid rounded-start" alt="<?php $_GET['nama'] ?>">
+              <img src="img/<?= $_GET["gambar"]; ?>" class="img-fluid rounded-start" alt="<?= $_GET["nama"]; ?>">
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title"><?= $_GET['nama'] ?></h5>
-                <p class="card-text"><?= $_GET['npm'] ?></p>
-                <p class="card-text"><?= $_GET['email'] ?></p>
-                <p class="card-text"><?= $_GET['prodi'] ?></p>
+                <h5 class="card-title"><?= $_GET["nama"]; ?></h5>
+                <p class="card-text"><?= $_GET["npm"]; ?></p>
+                <p class="card-text"><?= $_GET["email"]; ?></p>
+                <p class="card-text"><?= $_GET["prodi"]; ?></p>
                 <a href="kuliah_latihan2.php">Kembali</a>
               </div>
             </div>
