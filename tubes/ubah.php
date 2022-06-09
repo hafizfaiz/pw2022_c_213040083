@@ -1,10 +1,15 @@
 <?php 
+session_start();
 require 'functions.php';
 
-// query mahasiwa berdasarkan id
+if(!isset($_SESSION['login'])) {
+  header("Location: masuk.php");
+  exit;
+}
+
 $id = $_GET["id"];
 $brt = query("SELECT * FROM berita WHERE id=$id")[0];
-// cek ketika tombol ubah di-klik
+
 if (isset($_POST['ubah'])) {  
     //cek apakah data berhasil di tambahkan atau tidak
     if ( ubah($_POST) > 0) {
@@ -38,27 +43,40 @@ if (isset($_POST['ubah'])) {
  	}
  </style>
   <body>
-      <!-- navbar -->
-<header style="background-color: rgba(0, 141, 201, 0.9)">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center">
-                    <a href="/" class="d-flex align-items-center text-white text-decoration-none">
-                        <svg  width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-                    </a>
-                    <div class="text-start me-lg-auto">   
-                    <ul class="nav col-12 col-lg-auto justify-content-center " >
-                        <img class="my-auto" src="img/healthlogo.png" height="32px">
-                        <a class="nav-link text-white"  href="admin.php">Data Berita</a>
-                        <a class="nav-link text-white"  href="tambah.php">Tambah Berita</a>
-                    </ul>
-                    </div>        
-                    <div class="my-3 text-end ms-lg-auto ">
-                        <button type="button" class="btn btn-outline-light">Login</button>
-                        <button type="button" class="btn btn-warning">Sign-up</button>
-                    </div>
-            </div>
-        </div>
-    </header>
+<!-- navbar -->
+<nav class="navbar navbar-expand-md" style="background-color: rgb(0, 141, 201)">
+  <div class="container">
+    <a class="navbar-brand" href="#" style="color:white">
+      <img src="img/healthlogo.png" alt="" width="30" height="30" style="margin-right:10px">CintaSehat
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="color:white"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="indexadmin.php" style="color:white">Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color:white">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"  href="admin.php">Data Berita</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"  href="tambah.php">Tambah Berita</a>
+        </li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a type="button" href="logout.php" class="btn btn-danger mx-1">Log-Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <!-- navbar -->
     <div class="container">
         <h1>Form Ubah data Mahasiswa</h1>
@@ -76,11 +94,12 @@ if (isset($_POST['ubah'])) {
               </div>
             <div class="mb-3">
                 <label for="deskripsi" class="form-label">deskripsi :</label>
-                <input type="text" name="deskripsi" class="form-control" id="deskripsi" required value="<?= $brt["deskripsi"]?>">
+                <textarea name="deskripsi" id="deskripsi" rows="4" cols="50" required class="form-control"  ><?= $brt["deskripsi"]?></textarea>
               </div>
             <div class="mb-3">
                 <label for="gambar" class="form-label">Gambar :</label>
-                <input type="text" name="gambar" class="form-control" id="gambar" required value="<?= $brt["gambar"]?>">
+                <img src="img/<?php echo $brt["gambar"]; ?>" class=" mx-2 rounded-2 img-preview mb-4" width="120" style="display: block;" id="img-preview">
+                <input type="file" name="gambar" class="form-control gambar" id="gambar" required value="" onchange="previewImage()">
               </div>
               <button type="submit" class="btn btn-sn btn-danger" name="ubah">Ubah data</button>
             </form>
@@ -91,8 +110,7 @@ if (isset($_POST['ubah'])) {
 
     </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
+    <script src="js/script.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

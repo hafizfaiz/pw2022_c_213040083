@@ -1,4 +1,14 @@
 <?php 
+session_start();
+require 'functions.php';
+
+if (isset($_POST['login'])) {
+  $login= login($_POST);
+}
+if(isset($_SESSION['login'])) {
+  header("Location: index.php");
+  exit;
+}
 
 ?>
 <!doctype html>
@@ -17,63 +27,50 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-md" style="background-color: rgb(0, 141, 201)">
   <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="img/healthlogo.png" alt="" width="30" height="30">
+    <a class="navbar-brand" href="#" style="color:white">
+      <img src="img/healthlogo.png" alt="" width="30" height="30" style="margin-right:10px">CintaSehat
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="color:white"></i></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php" style="color:white">Beranda</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color:white">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="news.php" style="color:white">Berita</a>
-        </li>
-      </ul>
-    </div>
   </div>
 </nav>
 <!-- navbar -->
 <!-- Awal Form register --> 
-<div class="container mt-5 pt-5 mb-5">
-        <form class="form-container border rounded">
-        <h1 class="title-name ms-3 pt-3 mb-5 text-center">Masuk</h1>
+<div class="container mt-5 pt-5 mb-5" style="max-width: 1100px;">
+  <form class="form-container border rounded" action="" method="POST">
     <div class="row justify-content-center mb-5 mx-3">
+      <h1 class="title-name ms-3 pt-3 mt-5 mb-5 text-center">Masuk</h1>
         <div class="col-md-7">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                <label for="username" class="form-label">Nama</label>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
-                    <input type="email" class="form-control" id="exampleInputEmail1" 
-                            aria-describedby="emailHelp" placeholder="E-mail">
-                    </div>
+                    <span class="input-group-text"><i class="fas fa-user"></i></span> 
+                    <input type="text" name="username" class="form-control" id="username"  
+                    autocomplete="off" autofocus placeholder="Nama" required>
                 </div>
             </div>
+        </div>
         <div class="col-md-7">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Password</label>
+                <label for="password" class="form-label">Password</label>
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
-                    <input type="password" class="form-control" id="exampleInputEmail1" 
-                            aria-describedby="emailHelp" placeholder="Password">
-                    </div>
-                    <div class="mt-2">
-                <label>Kamu Belum Punya Akun? <a href="daftar.php" class="text-link">Daftar Disini</a></label>
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    <input type="password" name="password" class="form-control" id="password" 
+                    autocomplete="off" placeholder="Password" required>
                 </div>
-                </div>
-    <div>
+            <div class="mt-2">
+                <label>Kamu Belum Punya Akun? <a href="registrasi.php" class="text-link">Daftar Disini</a></label>
+            </div>
+        </div>
+        </div>
         <div class="row mt-5 justify-content-center">
             <div class="col-md-4 d-grid">
-                        <button type="submit" class="btn btn-outline-primary mb-3">Masuk</button>
-                </div>
+              <button type="submit" name="login" class="btn btn-outline-primary mb-3">Masuk</button>
             </div>
-        </form>
         </div>
+  </form>
+</div>
 
     <!-- Akhir Form register -->
 </body>

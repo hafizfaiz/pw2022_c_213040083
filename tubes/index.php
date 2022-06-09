@@ -1,5 +1,12 @@
 <?php 
+session_start();
 require 'functions.php';
+
+if (!isset($_SESSION['login'])) {
+  header("Location: masuk.php");
+  exit;
+}
+
 $berita = query("SELECT * FROM berita");
 // query sesuai dengan keyword pencarian, ketika tombol di-klik
 if(isset($_GET["cari"])) {
@@ -12,6 +19,7 @@ if(isset($_GET["cari"])) {
 
   $berita = query($query);
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,39 +37,23 @@ if(isset($_GET["cari"])) {
 <!-- navbar -->
 <nav class="navbar navbar-expand-md" style="background-color: rgb(0, 141, 201)">
   <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="img/healthlogo.png" alt="" width="30" height="30">
+    <a class="navbar-brand" href="#" style="color:white">
+      <img src="img/healthlogo.png" alt="" width="30" height="30" style="margin-right:10px">CintaSehat
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="color:white"></i></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php" style="color:white">Beranda</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color:white">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="news.php" style="color:white">Berita</a>
-        </li>
-      </ul>
-    </div>
-    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-        <a type="button" href="registrasi.php" class="btn btn-warning">Daftar</a>
-        </li>
-        <li class="nav-item">
-          <a type="button" href="masuk.php" class="btn btn-primary">Masuk</a>
+          <a type="button" href="logout.php" class="btn btn-danger mx-1">Log-Out</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 <!-- navbar -->
-<!-- awal carousel -->
+<!-- banner-->
 <div class="container">
   <div id="carouselExampleIndicators" class="carousel slide mt-4" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -76,36 +68,32 @@ if(isset($_GET["cari"])) {
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="img/banner.jpg" class="d-block img-fluid" alt="header1">
+        <img src="img/banner1.jpg" class="d-block img-fluid" alt="header1">
         <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+          <h3 class="mb-5" style="background-color:rgba(0, 141, 201,0.8); color:white">BERITA KESEHATAN</h3>
         </div>
       </div>
       <div class="carousel-item">
         <img src="img/banner3.jpg" class="d-block img-fluid" alt="header2">
         <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+          <h3 class="mb-5" style="background-color:rgba(0, 141, 201,0.8); color:white">JANJI TEMU DENGAN DOKTER TERBAIK</h3>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="img/banner.jpg" class="d-block img-fluid" alt="header3">
+        <img src="img/banner5.jpg" class="d-block img-fluid" alt="header3">
         <div class="card-img-overlay d-flex align-items-end justify-content-center">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+          <h3 class="mb-5" style="background-color:rgba(0, 141, 201,0.8); color:white">PEMBELIAN OBAT-OBATAN ONLINE</h3>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="img/banner2.jpg" class="d-block img-fluid" alt="header3">
+        <img src="img/banner4.jpg" class="d-block img-fluid" alt="header3">
       <div class="card-img-overlay d-flex align-items-end justify-content-center">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+        <h3 class="mb-5" style="background-color:rgba(0, 141, 201,0.8); color:white">PENJELASAN MENGENAI PENYAKIT-PENYAKIT</h3>
       </div>
     </div>
   </div>
 </div>
-<!-- akhir carousel -->
+<!-- banner -->
 <!-- carousel -->
 <div class="container mb-5 pb-5" style="max-width: 1296px;">
   <div class="card-group">
@@ -118,12 +106,12 @@ if(isset($_GET["cari"])) {
         <?php foreach($berita as $brt) { ?>
             <div class="col">
                 <div class="card bg-dark text-white">
-                    <img src="img/<?= $brt["gambar"]?>" class="card-img img-responsive gambar" alt="...">
+                    <img src="img/<?= $brt["gambar"];?>" class="card-img img-responsive gambar" alt="...">
                   <div class="card-img-overlay d-flex align-items-end justify-content-center">
-                    <p class="mb-5 " style="background-color:rgba(0, 141, 201,0.8); color:white"><?= $brt["judul"]?></p>
+                    <p class="mb-5 " style="background-color:rgba(0, 141, 201,0.8); color:white"><?= $brt["judul"];?></p>
                   </div>
                   <div class="card-img-overlay d-flex align-items-end justify-content-start">
-                    <button type="button" class="btn" style=" background-color:rgb(0, 141, 201); color:white">Selengkapnya</button>
+                    <a type="button" class="btn" style=" background-color:rgb(0, 141, 201); color:white" href="newspage.php?id=<?= $brt["id"]; ?>">Selengkapnya</a>
                     <p style="padding-left:20px;"><h4 style="-webkit-text-stroke: 0.3px black;"><?= date('d-m-Y',strtotime($brt['tanggal']))?></h4></p>
                   </div>
                 </div>
@@ -135,7 +123,7 @@ if(isset($_GET["cari"])) {
 <!-- carousel -->
 <!-- content -->
 <hr>
-<div class="container mb-5 pb-3" style="max-width: 1400px;"> 
+<div class="container mb-5 pb-3"> 
   <div class="row mt-5 mb-2 title">
     <div class="col-12">
       <h1>Data Sebaran Covid-19</h1>
@@ -182,7 +170,7 @@ if(isset($_GET["cari"])) {
             <h2>Situasi Virus</h2>
             <h2>COVID-19</h2>
             <h2 class="mb-2">di Indonesia</h2>
-            <button type="button" class="btn" style=" background-color:rgb(0, 141, 201); color:white">Selengkapnya</button>
+            <a type="button" class="btn" style=" background-color:rgb(0, 141, 201); color:white" href="petasebaran.php">Selengkapnya</a>
           </div>
       </div>
     </div>
@@ -190,6 +178,82 @@ if(isset($_GET["cari"])) {
 </div>
 </div>
 <!-- content -->
+<hr>
+<div class="container ">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+        <div class="card mt-3 mx-3 border-0 my-5" style="width: 20rem;">
+          <img src="img/pusatkesehatan.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Keluhan</h5>
+            <p class="card-text">form untuk mengirimkan informasi mengenai keluhan penyakit yang diderita.</p>
+            <a href="keluhan.php" class="btn btn-primary">selengkapnya</a>
+          </div>
+        </div>
+        </div>
+        <div class="col">
+        <div class="card mt-3 mx-3 border-0 my-5" style="width: 20rem;">
+          <img src="img/obat.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Obat</h5>
+            <p class="card-text">Pembelian obat-obatan online.</p>
+            <a href="obat.php" class="btn btn-primary">selengkapnya</a>
+          </div>
+        </div>
+        </div>
+        <div class="col">
+        <div class="card mt-3 mx-3 border-0 my-5" style="width: 20rem;">
+          <img src="img/penyakit.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Penyakit</h5>
+            <p class="card-text">30 Jenis Penyakit yang bisa menular, penyebab dan pencegahan.</p>
+            <a href="penyakit.php" class="btn btn-primary">selengkapnya</a>
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- deskripsi -->
+<hr>
+<div div class="container mb-5 pb-3" style="max-width: 1400px"> 
+  <h3 class="text-center mb-5">PLATFORM KESEHATAN DENGAN FITUR TERLENGKAP</h3>
+  <p>Cintasehat adalah platform kesehatan terbaik dengan fitur terlengkap di Indonesia yang selalu hadir memberikan tips dan informasi terbaru mengenai kesehatan. Situs kesehatan ini sukses diluncurkan pada 2016 dan berada dalam naungan PT Global Urban Esensial. CintaSehat menjadi produk pertama tentang kesehatan yang memiliki fitur terlengkap di Indonesia.</p>
+  <p>Di sini Kamu dapat membaca berbagai artikel tentang kesehatan, mulai dari tema wanita, medis, hubungan percintaan dan seks, hingga gaya hidup sehat. Tak perlu takut hoax, karena semua artikel ini berasal dari sumber terpercaya dan direview oleh pakar kesehatan.</p>
+  <p>Sehat itu seru lho, apalagi kalau sehatnya bareng-bareng. Website kesehatan ini memiliki banyak fitur yang unik dan menarik untuk mendukung kesehatanmu. Melalui fitur sakit apa, Kamu dapat melakukan cek kesehatan secara online. Kemudian, cari tahu tentang penyakit tersebut, mulai dari pengertian penyakit, gejala, hingga cara pencegahan di fitur penyakit. Setelah itu, lakukan penanganan yang tepat dengan mengonsumsi obat sesuai anjuran di fitur info obat.</p>
+  <p>Khusus untuk Kamu para wanita, CintaSehat sangat mengerti kecemasanmu. Kamu dapat melakukan kontrol terhadap berat badanmu dengan menghitung Indeks Massa Tubuh (IMT) secara cepat di fitur hitung kalori dan IMT. Selain itu, pantau siklus haidmu untuk mendapatkan perhitungan yang tepat guna terciptanya kehamilan di fitur siklus haid. Kemudian jika Mums sudah hamil dan melahirkan, ketahui perkembangan si Kecil melalui fitur kehamilan lalu berlanjut ke fitur tumbuh kembang dan imunisasi.</p>
+  <p>Sesuai dengan visi dan misi CintaSehat, platform kesehatan ini merupakan awal dari gerakan positif untuk mengajak masyarakat Indonesia menyadari jika sehat itu mudah. Yuk, jadi bagian dari visi ini!</p>
+</div>
+<!-- deskripsi -->
+<!-- Footer -->
+<div class="container">
+
+  <footer class="bg-light p-5 mt-5" style="max-width: 1400px">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 text-md-start text-center pt-2 pb-2">
+                <a href="#">
+                  <img src="img/healthlogo.png" style="width: 30px;">
+                </a>
+                <span>Copyright @2022 | created by Cinta Sehat</span>
+              </div>
+              <div class="col-md-6 text-md-end text-center pt-2 pb-2">
+                <a href="#">
+                  <img src="img/whatsapp.png" class="ms-2" style="width: 30px;">
+                </a>
+  
+                <a href="#">
+                  <img src="img/instagram.png" class="ms-2" style="width: 30px;">
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+</div>
+      <!-- akhir footer -->
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
